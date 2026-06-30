@@ -1,5 +1,6 @@
 package com.iwe3.hzl.service.impl;
 
+import com.iwe3.hzl.api.CategoryVo;
 import com.iwe3.hzl.dao.CustomerDao;
 import com.iwe3.hzl.pojo.Customer;
 import com.iwe3.hzl.service.CustomerService;
@@ -7,6 +8,8 @@ import com.iwe3.hzl.util.Result;
 import com.iwe3.hzl.util.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -22,7 +25,8 @@ public class CustomerServiceImpl implements CustomerService {
         }
         int i = customerDao.insertCustomer(customer);
         if (i > 0) {
-            return ResultGenerator.genSuccessResult();
+            List<CategoryVo> categoryVos = List.of();
+            return ResultGenerator.genSuccessResult(categoryVos);
 
         }
         return ResultGenerator.genFailResult("注册失败！");
