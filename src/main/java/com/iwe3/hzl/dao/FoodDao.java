@@ -4,6 +4,7 @@ import com.iwe3.hzl.pojo.Food;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -18,10 +19,10 @@ public interface FoodDao {
     @Select("select * from food")
     List<Food> selectAllFoods();
 
-    @Select("select * from food where fname like #{keyword}")
-    List<Food> selectLikeFoods(@Param("keyword") String keyword);
-
-    // 给业务调用的 selectFoodsByKey 补充SQL注解，和上方模糊查询逻辑一致
     @Select("select * from food where fname like #{keyWord}")
-    List<Food> selectFoodsByKey(@Param("keyWord") String keyWord);
+    List<Food> selectFoodsByKey(String keyWord);
+
+    @Update("update food set storage = storage - #{foodQuantity} where fname = #{foodName}")
+    void updateFoodStorage(@Param("foodName") String foodName,
+                           @Param("foodQuantity") Integer foodQuantity);
 }

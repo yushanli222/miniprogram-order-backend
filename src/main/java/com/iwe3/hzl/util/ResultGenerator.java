@@ -11,11 +11,7 @@ public class ResultGenerator {
 
     private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";
 
-    public static Result genSuccessResult(List<CategoryVo> categoryVos) {
-        return new Result()
-                .setCode(ResultCode.SUCCESS)
-                .setMessage(DEFAULT_SUCCESS_MESSAGE);
-    }
+
 
     public static Result genSuccessResult(Object data) {
         return new Result()
@@ -30,7 +26,12 @@ public class ResultGenerator {
                 .setMessage(message);
     }
 
-    public static Result genSFailResult(String s) {
+
+    public static Result genSFailResult(String 有未使用优惠券) {
+        return null;
+    }
+
+    public static Result genSuccessResult() {
         return null;
     }
 }
