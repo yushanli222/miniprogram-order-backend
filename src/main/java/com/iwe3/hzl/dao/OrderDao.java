@@ -3,10 +3,7 @@ package com.iwe3.hzl.dao;
 import com.iwe3.hzl.api.OrderMap;
 import com.iwe3.hzl.pojo.Detail;
 import com.iwe3.hzl.pojo.Order;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -27,4 +24,21 @@ public interface OrderDao {
 
     @Select("select * from detail where order_id = #{oid}")
     List<Detail> selectDetailByOid(String oid);
+
+
+    @Update("UPDATE orders SET status = #{status} WHERE oid = #{oid}")
+    void updateOrderStatus(Order order);
+
+    @Select("SELECT * FROM orders WHERE oid = #{oid}")
+    Order selectOrderById(Integer oid);
+
+
+
+    // 取消订单：把订单状态修改为 2（已取消）
+    @Update("UPDATE orders SET status = 2 WHERE oid = #{oid}")
+    int cancelOrder(@Param("oid") Integer oid);
+
+    int countCommentableOrder(String orderId, String openid);
+
+    int finishOrderAfterComment(String orderId, String openid);
 }

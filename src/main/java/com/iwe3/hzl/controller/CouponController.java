@@ -7,26 +7,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/wx")//为了类被读取加载
+@RequestMapping("/wx")
 public class CouponController {
     @Autowired
     private CouponService couponService;
 
     @RequestMapping("getAllCoupon")
-    public Result getAllCoupon() {
-        return  couponService.getCoupons();
+    public Result getAllCoupon(){//（）内写不写看有没有openid
+        return couponService.getCoupons();
     }
-
     @RequestMapping("recevieCoupon")
-    public  Result recevieCoupon(String openid,Integer couId) {
+    public Result recevieCoupon(String openid,Integer couId){
         return couponService.recevieCoupon(openid,couId);
     }
     @RequestMapping("getMyCoupons")
-    public Result getMyCoupons(String openid,String status) {
+    public Result getMyCoupons(String openid,String status){
         return couponService.getMyCoupons(openid,status);
     }
     @RequestMapping("getAllAvailableCoupons")
-    public  Result getAllAvailableCoupons(String openid) {
+    public Result getAllAvailableCoupons(String openid){
         return couponService.getAvailableCoupons(openid);
     }
 }

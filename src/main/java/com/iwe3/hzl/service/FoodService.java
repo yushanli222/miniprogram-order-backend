@@ -6,4 +6,6 @@ public interface FoodService {
     Result getRecommendFoods();
 
     Result getLatestFoods();
+
+    Result getFoodById(Integer fid);
 }

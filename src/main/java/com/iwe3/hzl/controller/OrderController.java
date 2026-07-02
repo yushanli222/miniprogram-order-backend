@@ -8,6 +8,7 @@ import com.iwe3.hzl.service.OrderService;
 import com.iwe3.hzl.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,6 +19,7 @@ public class OrderController {
 
     @RequestMapping("createOrder")
     public Result createOrder(OrderVo orderVo , Integer couId) {
+
         return orderService.createOrder(orderVo,couId);
     }
     @RequestMapping("getOrderByStatus")
@@ -28,5 +30,17 @@ public class OrderController {
         PageInfo<OrderMap> orderMapPageInfo=
                 orderService.getOrderByStatus(openid,status,currentPage,pageSize);
         return orderMapPageInfo;
+    }
+    @RequestMapping("toPayOrder")
+    public Result toPayOrder(Integer oid,
+                             Double money,
+                             String openid){
+        return orderService.toPayOrder(oid,money,openid);
+
+
+    }
+    @RequestMapping("cancelOrder")
+    public Result cancelOrder(Integer oid){
+        return orderService.cancelOrder(oid);
     }
 }

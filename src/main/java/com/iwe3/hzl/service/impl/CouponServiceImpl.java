@@ -56,38 +56,38 @@ public class CouponServiceImpl implements CouponService {
         }
         return ResultGenerator.genFailResult("领取失败");
     }
-
     @Override
-    public Result getMyCoupons(String openid, String status) {
-        //查询到所有的优惠券
-        List<MyCoupon> list = couponDao.getMyCoupons(openid);
+    public Result getMyCoupons(String openid,String status){
+        //查到所有的优惠卷
+        List<MyCoupon> list=couponDao.getMyCoupons(openid);
         //需要把我领取的每张优惠券的具体信息，绑定到coupon属性
         //使用循环遍历我的所有优惠券集合
         for(MyCoupon myCoupon:list){
-            //拿到我领取的每一个 我的优惠券信息，获取对应的优惠券id
+            //拿到我领取的每一个 我的优惠券信息 获取对应的优惠券id
             Integer couid=myCoupon.getCouid();
-            Coupon coupon = couponDao.selectCouponByCouid(couid);
+            Coupon coupon =couponDao.selectCouponByCouid(couid);
             myCoupon.setCoupon(coupon);
         }
+        //根据状态值返回对应状态值的数据
         if("all".equals(status)){
             return ResultGenerator.genSuccessResult(list);
         }
+        //如果是其他值。遍历上面所有数据，然后放到新集合中
         List<MyCoupon> newList=new ArrayList<>();
+        //jdk中的stream流，获取状态码对应的优惠券，放到新集合中返回
         list.stream().filter(s->s.getStatus().equals(status))
                 .forEach(s->newList.add(s));
         return ResultGenerator.genSuccessResult(newList);
     }
-
     @Override
-    public Result getAvailableCoupons(String openid) {
-        List<MyCoupon> myCoupons = couponDao.selectAvailableCoupons(openid);
+    public Result getAvailableCoupons(String openid){
+        List<MyCoupon> myCoupons=couponDao.selectAvailableCoupons(openid);
         for(MyCoupon myCoupon:myCoupons){
             Integer couid=myCoupon.getCouid();
-            Coupon coupon = couponDao.selectCouponByCouid(couid);
+            Coupon coupon =couponDao.selectCouponByCouid(couid);
             myCoupon.setCoupon(coupon);
         }
-
         return ResultGenerator.genSuccessResult(myCoupons);
     }
-
 }
+

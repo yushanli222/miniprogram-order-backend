@@ -19,7 +19,7 @@ import com.iwe3.hzl.dao.FoodDao;
 import com.iwe3.hzl.dao.CategoryDao;
 
 @Service
-public  class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryDao categoryDao;
     @Autowired

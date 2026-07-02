@@ -11,4 +11,7 @@ public interface OrderService {
                                         Integer status,
                                         Integer currentPage,
                                         Integer pageSize);
+
+    Result toPayOrder(Integer oid, Double money, String openid);
+    Result cancelOrder(Integer oid);
 }

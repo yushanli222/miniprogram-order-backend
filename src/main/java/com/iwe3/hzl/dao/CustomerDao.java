@@ -9,10 +9,11 @@ public interface CustomerDao {
     Customer selectCustomerById(String openId);
     @Insert("insert  into  customer values (#{openid},#{nickname},#{phoneNumber},#{avatarUrl},0.0)")
     int insertCustomer(Customer customer);
-
-    @Update("update customer set money = money - #{totalPrice} where openid = #{openid}")
+    @Update("update customer set money = money + #{money} where openid = #{openid}")
+    int updateCustomerMoney(@Param("money")Double money,
+                            @Param("openid") String openid);
+    @Update("update  customer set money =money -#{totalPrice} where openid=#{openid}")
     void subCustomerMoney(@Param("openid")String openid,
-                          @Param("totalPrice")Integer totalPrice);
+                          @Param("totalPrice") Double totalPrice);
 
-    int updateCustomerMoney(Double money, String openid);
 }
